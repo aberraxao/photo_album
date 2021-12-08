@@ -4,7 +4,7 @@ class ColorImageUtil {
 	 * creation and manipulation of ColorImages.
 	 */
 
-	static ColorImage paste(ColorImage imgBig, ColorImage imgSmall, int xi, int yi) {
+	static void paste(ColorImage imgBig, ColorImage imgSmall, int xi, int yi) {
 		/**
 		 * Function that copies the non transparent part of a ColorImage on top of
 		 * another.
@@ -18,15 +18,13 @@ class ColorImageUtil {
 		// Goes through the big picture to ensure that we are between bounds
 		for (int x = 0; x < imgBig.getWidth(); x++)
 			for (int y = 0; y < imgBig.getHeight(); y++) {
-
 				if (x > xi && x < xi + imgSmall.getWidth() && y > yi && y < yi + imgSmall.getHeight())
 					if (!ignoreColor.isEqualTo(imgSmall.getColor(x - xi, y - yi)))
 						imgBig.setColor(x, y, imgSmall.getColor(x - xi, y - yi));
 			}
 
-		return imgBig;
 	}
-
+	
 	static void test_1_1() {
 		// TODO: add the ignoreColor as an option
 		ColorImage imgBig = new ColorImage("photo04.png");
