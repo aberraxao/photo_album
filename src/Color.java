@@ -6,7 +6,17 @@
  * rgb[2] - Blue
  */
 class Color {
-
+	
+	/**
+	* A1 Commonly used colours
+	**/
+	static final Color RED = new Color(255, 0, 0);
+	static final Color GREEN = new Color(0, 255, 0);
+	static final Color BLUE = new Color(0, 0, 255);
+	static final Color WHITE = new Color(255, 255, 255);
+	static final Color BLACK = new Color(0, 0, 0);
+	
+	
 	private final int[] rgb; // @color
 
 	/**
@@ -50,6 +60,17 @@ class Color {
 
 	static boolean valid(int value) {
 		return value >= 0 && value <= 255;
+	}
+	
+	/**
+	 * Checks if the Color A is equal to the Color B
+	 */
+	boolean isEqualTo (Color c) {
+		if (c == null)
+			return false;
+		return this.rgb[0]==c.rgb[0] &&
+			   this.rgb[1]==c.rgb[1] &&
+			   this.rgb[2]==c.rgb[2];
 	}
 
 }
