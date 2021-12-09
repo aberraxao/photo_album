@@ -59,14 +59,35 @@ class ColorImageUtil {
 
 		for (int x = 0; x < imgNew.getWidth(); x++)
 			for (int y = 0; y < imgNew.getHeight(); y++)
-				imgNew.setColor(x, y, img.getColor((int)(x/factor), (int)(y/factor)));
+				imgNew.setColor(x, y, img.getColor((int) (x / factor), (int) (y / factor)));
 
 		return imgNew;
 	}
 
+	static ColorImage grey(ColorImage img) {
+		/**
+		 * Function that creates a grey copy of an image.
+		 */
+
+		ColorImage imgNew = new ColorImage(img.getWidth(), img.getHeight());
+
+		for (int x = 0; x < imgNew.getWidth(); x++)
+			for (int y = 0; y < imgNew.getHeight(); y++) {
+				int rgb = (int)(0.3*img.getColor(x, y).getR() + 0.59*img.getColor(x, y).getG() +0.11*img.getColor(x, y).getB());
+				Color grey = new Color(rgb, rgb, rgb);
+				imgNew.setColor(x, y, grey);
+			}
+		return imgNew;
+	}
+
+	static void test_1_4() {
+		ColorImage img = new ColorImage("cat.jpeg");
+		ColorImage imgNew = grey(img);
+	}
+
 	static void test_1_3() {
 		ColorImage img = new ColorImage("cat.jpeg");
-		//ColorImage imgNew = scale(img, 0.7);
+		// ColorImage imgNew = scale(img, 0.7);
 		ColorImage imgNew = scale(img, 1.25);
 	}
 
