@@ -57,19 +57,17 @@ class ColorImageUtil {
 
 		ColorImage imgNew = new ColorImage(widthNew, heightNew);
 
-		for (double x = 0; x < imgNew.getWidth(); x += factor)
-			for (double y = 0; y < imgNew.getHeight(); y += factor)
-				for (int xa = (int) x; xa < (int) (x +factor); xa++)
-					for (int ya = (int) y; ya < (int) (y + factor); ya++)
-						imgNew.setColor(xa, ya, img.getColor((int) (x / factor), (int) (y / factor)));
+		for (int x = 0; x < imgNew.getWidth(); x++)
+			for (int y = 0; y < imgNew.getHeight(); y++)
+				imgNew.setColor(x, y, img.getColor((int)(x/factor), (int)(y/factor)));
 
 		return imgNew;
 	}
 
 	static void test_1_3() {
 		ColorImage img = new ColorImage("cat.jpeg");
-		ColorImage imgNew = scale(img, 0.7);
-		//ColorImage imgNew = scale(img, 2);
+		//ColorImage imgNew = scale(img, 0.7);
+		ColorImage imgNew = scale(img, 1.25);
 	}
 
 	static void test_1_2() {
