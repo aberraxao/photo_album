@@ -4,9 +4,9 @@ class ColorImageUtil {
 	 * creation and manipulation of ColorImages.
 	 */
 
-	static void paste(ColorImage imgBig, ColorImage imgSmall, int xi, int yi) {
+	static void paste(ColorImage imgBig, ColorImage imgSmall, int xi, int yi, boolean isTransparent) {
 		/**
-		 * Function that copies the non transparent part of a ColorImage on top of
+		 * Procedure that copies the non transparent part of a ColorImage on top of
 		 * another.
 		 * 
 		 * The transparent colour is defined by the variable 'ignoreColor'. The
@@ -18,24 +18,75 @@ class ColorImageUtil {
 		// Goes through the big picture to ensure that we are between bounds
 		for (int x = 0; x < imgBig.getWidth(); x++)
 			for (int y = 0; y < imgBig.getHeight(); y++) {
-				if (x > xi && x < xi + imgSmall.getWidth() && y > yi && y < yi + imgSmall.getHeight())
-					if (!ignoreColor.isEqualTo(imgSmall.getColor(x - xi, y - yi)))
+				if (x >= xi && x < xi + imgSmall.getWidth() && y >= yi && y < yi + imgSmall.getHeight())
+					if (!(isTransparent && ignoreColor.isEqualTo(imgSmall.getColor(x - xi, y - yi))))
 						imgBig.setColor(x, y, imgSmall.getColor(x - xi, y - yi));
 			}
 
+		return;
 	}
-	
+
+	static void mozaico(ColorImage img, int width, int height, boolean isTransparent) {
+		/**
+		 * Procedure that creates a pattern based on an image. It might include or not
+		 * transparency.
+		 */
+
+		ColorImage page = new ColorImage(width, height);
+
+		int x = 0, y = 0;
+
+		while (y < page.getHeight()) {
+			while (x < page.getWidth()) {
+				paste(page, img, x, y, isTransparent);
+				x = x + img.getWidth();
+			}
+			x = 0;
+			y = y + img.getHeight();
+		}
+
+		return;
+	}
+
+	static ColorImage scale(ColorImage img, double factor) {
+		/**
+		 * Function that creates a copy of an image scaled by a factor.
+		 */
+		int widthNew = (int) (factor * img.getWidth());
+		int heightNew = (int) (factor * img.getHeight());
+
+		ColorImage imgNew = new ColorImage(widthNew, heightNew);
+
+		for (double x = 0; x < imgNew.getWidth(); x += factor)
+			for (double y = 0; y < imgNew.getHeight(); y += factor)
+				for (int xa = (int) x; xa < (int) (x +factor); xa++)
+					for (int ya = (int) y; ya < (int) (y + factor); ya++)
+						imgNew.setColor(xa, ya, img.getColor((int) (x / factor), (int) (y / factor)));
+
+		return imgNew;
+	}
+
+	static void test_1_3() {
+		ColorImage img = new ColorImage("cat.jpeg");
+		ColorImage imgNew = scale(img, 0.7);
+		//ColorImage imgNew = scale(img, 2);
+	}
+
+	static void test_1_2() {
+		ColorImage img = new ColorImage("cat.jpeg");
+		boolean isTransparent = false;
+		int width = 500, height = 1000;
+
+		mozaico(img, width, height, isTransparent);
+	}
+
 	static void test_1_1() {
-		// TODO: add the ignoreColor as an option
 		ColorImage imgBig = new ColorImage("photo04.png");
 		ColorImage imgSmall = new ColorImage("photo04_2.png");
 		int x = 5, y = 20;
 
-		paste(imgBig, imgSmall, x, y);
-		// paste(imgSmall, imgBig, x, y);
-
-		System.out.println("end");
+		paste(imgBig, imgSmall, x, y, true);
+		// paste(imgSmall, imgBig, x, y, true);
 	}
-	
-	
+
 }

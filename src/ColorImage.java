@@ -33,4 +33,5 @@ class ColorImage {
 		int[] rgb = ImageUtil.decodeRgb(data[y][x]);
 		return new Color(rgb[0], rgb[1], rgb[2]);
 	}
+
 }
