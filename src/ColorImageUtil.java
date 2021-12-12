@@ -1,8 +1,4 @@
 class ColorImageUtil {
-	/**
-	 * This static class contains functions and procedures that are useful for the
-	 * creation and manipulation of ColorImages.
-	 */
 
 	static void paste(ColorImage imgBig, ColorImage imgSmall, int xi, int yi, boolean isTransparent) {
 		/**
@@ -22,13 +18,11 @@ class ColorImageUtil {
 					if (!(isTransparent && ignoreColor.isEqualTo(imgSmall.getColor(x - xi, y - yi))))
 						imgBig.setColor(x, y, imgSmall.getColor(x - xi, y - yi));
 			}
-
-		return;
 	}
 
-	static void mozaico(ColorImage img, int width, int height, boolean isTransparent) {
+	static ColorImage mozaico(ColorImage img, int width, int height, boolean isTransparent) {
 		/**
-		 * Procedure that creates a pattern based on an image. It might include or not
+		 * Function that creates a pattern based on an image. It might include or not
 		 * transparency.
 		 */
 
@@ -44,8 +38,8 @@ class ColorImageUtil {
 			x = 0;
 			y = y + img.getHeight();
 		}
-
-		return;
+		
+		return page;
 	}
 
 	static ColorImage scale(ColorImage img, double factor) {
@@ -129,7 +123,9 @@ class ColorImageUtil {
 		boolean isTransparent = false;
 		int width = 500, height = 1000;
 
-		mozaico(img, width, height, isTransparent);
+		ColorImage page = mozaico(img, width, height, isTransparent);
+		
+		return;
 	}
 
 	static void test_1_1() {
