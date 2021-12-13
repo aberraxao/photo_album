@@ -22,8 +22,7 @@ class Pagina {
 		 * Constructor that receives a single Foto and the size of the pagina.
 		 */
 		this.pagina = new ColorImage(width, height);
-		this.fotos = new Foto[1];
-		this.fotos[0] = foto;
+		addPhoto(foto);
 	}
 
 	Pagina(ColorImage[] images, int width, int height) {
@@ -31,10 +30,9 @@ class Pagina {
 		 * Constructor that receives a list of ColorImages and the size of the pagina.
 		 */
 		this.pagina = new ColorImage(width, height);
-		this.fotos = new Foto[images.length];
 
 		for (int i = 0; i < images.length; i++)
-			this.fotos[i] = new Foto(images[i], "Foto" + i, "");
+			addPhoto(new Foto(images[i], "", ""));
 	}
 
 	// Photo's functions and procedures
@@ -43,7 +41,9 @@ class Pagina {
 		 * Procedure that adds a Foto at the end of the pagina, i.e., Foto vector
 		 */
 		int i = 0;
-		if (this.fotos[i] != null) {
+		if (this.fotos == null) {
+			this.fotos = new Foto[1];
+		} else if (this.fotos[i] != null) {
 			Foto[] faux = new Foto[getNbPhotos() + 1];
 			while (i < getNbPhotos()) {
 				faux[i] = this.fotos[i];
@@ -84,6 +84,7 @@ class Pagina {
 
 	// Test functions
 	static void test_3_1() {
+		// TODO: Add exception when adding a null vector
 		ColorImage img = new ColorImage("cat.jpeg");
 		Foto foto = new Foto(img, "Gato com fundo castanho.", "09-12-2021");
 
