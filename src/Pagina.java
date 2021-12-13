@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * The purpose of the class Pagina is to represent a page of an album. There are
  * 2 attributes to this class: - pagina of type ColorImage; - fotos of type
@@ -230,10 +228,12 @@ class Pagina {
 		Pagina pag2 = new Pagina(fotos2, 500, 1000);
 		pag2.removeremoveFoto(1);
 		*/
-		// TODO: check this
+
 		Foto[] fotos3 = { foto1, foto2, foto3 };
 		Pagina pag3 = new Pagina(fotos3, 500, 1000);
 		pag3.removeFoto(2);
+		pag3.autoFotoPosition(true);
+		ColorImage pagPreview = pag3.getPagina(true);
 		
 		return;
 	}
@@ -251,6 +251,9 @@ class Pagina {
 
 		Pagina pag = new Pagina(fotos, 500, 1000);
 		pag.addFoto(foto3);
+		
+		pag.autoFotoPosition(true);
+		ColorImage pagPreview = pag.getPagina(true);
 
 		return;
 	}
@@ -268,6 +271,9 @@ class Pagina {
 		// Pagina pag3 = new Pagina(fotos, 500, 1000);
 
 		pag1.setMozaico(img, true);
+		
+		pag1.autoFotoPosition(true);
+		ColorImage pagPreview = pag1.getPagina(true);
 
 		return;
 	}
