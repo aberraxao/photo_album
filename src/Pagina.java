@@ -97,6 +97,8 @@ class Pagina {
 			throw new IllegalArgumentException("The position of the Foto to remove that was provided, " + pos
 					+ ", needs to be " + "widhtin the size of the Foto vector, i.e., between 0 and "
 					+ (this.getNbFotos() - 1) + ".");
+		else if (this.fotos[pos] == null)
+			throw new NullPointerException("The photo is null.");
 		else {
 			Foto[] faux = new Foto[getNbFotos() - 1];
 			for (int i = 0; i < faux.length; i++)
@@ -124,6 +126,8 @@ class Pagina {
 		if (pos1 < 0 || pos2 < 0 || pos1 >= this.getNbFotos() || pos2 >= this.getNbFotos())
 			throw new IllegalArgumentException("One or both positions to be switched are not allowed (" + pos1 + ", "
 					+ pos2 + "). Please ensure that both positions are between 0 and " + (this.getNbFotos() - 1) + ".");
+		else if (this.fotos[pos1] == null || this.fotos[pos2] == null)
+			throw new NullPointerException("At least one of the Fotos is null (" + pos1 + ", " + pos2 + ")");
 		else if (pos1 != pos2) {
 			// If the positions are different performs the switch
 			Foto faux = this.fotos[pos1];
@@ -258,7 +262,6 @@ class Pagina {
 		return;
 	}
 	static void test_3_1() {
-		// TODO: Add exception when adding a null vector
 		ColorImage img = new ColorImage("cat.jpeg");
 		Foto foto = new Foto(img, "Gato com fundo castanho.", "09-12-2021");
 
