@@ -78,7 +78,23 @@ class Pagina {
 			this.fotos = faux;
 		}
 	}
-
+	
+	void switchFotoPos(int pos1, int pos2) {
+		/*
+		 * Procedure that switches the position of 2 Fotos given their positions.
+		 */
+		
+		if (pos1 < 0 || pos2 <0 || pos1 >= this.getNbPhotos() || pos2 >= this.getNbPhotos())
+			throw new IllegalArgumentException("One or both positions to be switched are not allowed (" 
+					+ pos1 + ", " + pos2 + "). Please ensure that both positions are between 0 and "
+					+ (this.getNbPhotos() - 1) + ".");
+		else if (pos1 != pos2) {
+			// If the positions are different performs the switch
+			Foto faux = this.fotos[pos1];
+			this.fotos[pos1] = this.fotos[pos2];
+			this.fotos[pos2] = faux;
+		}
+	}
 	// Pagina's functions and procedures
 	int getWidth() {
 		return this.pagina.getWidth();
@@ -104,6 +120,29 @@ class Pagina {
 	}
 
 	// Test functions
+	static void test_3_4() {
+		ColorImage img1 = new ColorImage("cat.jpeg");
+		ColorImage img2 = new ColorImage("photo04.png");
+		ColorImage img3 = new ColorImage("photo02.png");
+
+		Foto foto1 = new Foto(img1, "Gato com fundo castanho.", "09-12-2021");
+		Foto foto2 = new Foto(img2, "Gato cinza.", "10-12-2021");
+		Foto foto3 = new Foto(img3, "Gato preto anime.", "11-12-2021");
+		
+		
+		/*
+		Foto[] fotos1 = { foto1, foto2, foto3 };
+		Pagina pag1 = new Pagina(fotos1, 500, 1000);
+		pag1.switchFotoPos(-1, 0);
+		*/
+	
+		Foto[] fotos2 = { foto1, foto2, foto3 };
+		Pagina pag2 = new Pagina(fotos2, 500, 1000);
+		pag2.switchFotoPos(0, 2);
+		
+		return;
+	}
+	
 	static void test_3_3() {
 		ColorImage img1 = new ColorImage("cat.jpeg");
 		ColorImage img2 = new ColorImage("photo04.png");
