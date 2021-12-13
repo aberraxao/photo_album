@@ -63,17 +63,18 @@ class Pagina {
 		/*
 		 * Function that obtains the visualization of a pagina
 		 */
-		
-		this.autoFotoPosition(isTransparent);
-		
-		ColorImage finalPagina = this.pagina;		
+
+		if (getNbFotos() > 0 && this.fotos[0] != null)
+			this.autoFotoPosition(isTransparent);
+
+		ColorImage finalPagina = this.pagina;
 		int i = 0;
-		while (i < getNbFotos()) {
+		while (i < getNbFotos() && this.fotos[i] != null) {
 			ColorImageUtil.paste(finalPagina, this.fotos[i].getFoto(), this.fotos[i].getX(), this.fotos[i].getY(),
 					isTransparent);
 			i++;
 		}
-		
+
 		return finalPagina;
 	}
 
@@ -157,8 +158,6 @@ class Pagina {
 
 		while ((y + 5) < this.getHeight() && i < getNbFotos()) {
 			while ((x + 5) < getWidth() && i < getNbFotos()) {
-				// ColorImageUtil.paste(getPagina(true), this.fotos[i].getFoto(), x, y,
-				// isTransparent);
 				this.fotos[i].setPositions(x, y);
 				x = x + 5 + this.fotos[i].getFoto().getWidth();
 				maxHeight = Math.max(maxHeight, this.fotos[i].getFoto().getHeight());
@@ -205,10 +204,9 @@ class Pagina {
 		Foto foto3 = new Foto(img3, "Gato preto anime.", "11-12-2021");
 
 		/*
-		Foto[] fotos1 = { foto1, foto2, foto3 }; 
-		Pagina pag1 = new Pagina(fotos1, 500, 1000); 
-		pag1.switchFotoPos(-1, 0);
-		*/
+		 * Foto[] fotos1 = { foto1, foto2, foto3 }; Pagina pag1 = new Pagina(fotos1,
+		 * 500, 1000); pag1.switchFotoPos(-1, 0);
+		 */
 
 		Foto[] fotos2 = { foto1, foto2, foto3 };
 		Pagina pag2 = new Pagina(fotos2, 500, 1000);

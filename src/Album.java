@@ -90,17 +90,19 @@ class Album {
 		Foto foto = new Foto(img, "Gato com fundo castanho.", "09-12-2021");
 
 		Foto[] fotos = { foto, foto };
-		Pagina pag1 = new Pagina(foto, 500, 1000);
-		pag1.setMozaico(img, true);
-		alb.addPagina(pag1, 0);
+		Pagina pag = new Pagina(foto, 500, 1000);
+		pag.setMozaico(img, true);
+		alb.addPagina(pag, 0);
 
-		// ColorImage currentPagePreview = alb.getCurrentPagina(true);
+		ColorImage currentPagePreview = alb.getCurrentPagina(true);
+		
 		alb.switchPaginaPos(0, 1);
-		// ColorImage currentPagePreview2 = alb.getCurrentPagina(true);
+		currentPagePreview = alb.getCurrentPagina(true);
+		
 		alb.next();
 		alb.switchPaginaPos(0, 1);
 		alb.prev();
-		ColorImage currentPagePreview3 = alb.getCurrentPagina(true);
+		currentPagePreview = alb.getCurrentPagina(true);
 
 		return;
 	}
