@@ -11,7 +11,6 @@ class ColorImageUtil {
 
 		Color ignoreColor = new Color(255, 255, 255);
 
-		// Goes through the big picture to ensure that we are between bounds
 		for (int x = 0; x < imgBig.getWidth(); x++)
 			for (int y = 0; y < imgBig.getHeight(); y++) {
 				if (x >= xi && x < xi + imgSmall.getWidth() && y >= yi && y < yi + imgSmall.getHeight())
@@ -20,13 +19,11 @@ class ColorImageUtil {
 			}
 	}
 
-	static ColorImage mozaico(ColorImage img, int width, int height, boolean isTransparent) {
+	static void mozaico(ColorImage page, ColorImage img, boolean isTransparent) {
 		/**
-		 * Function that creates a pattern based on an image. It might include or not
+		 * Procedure that creates a pattern based on an image. It might include or not
 		 * transparency.
 		 */
-
-		ColorImage page = new ColorImage(width, height);
 
 		int x = 0, y = 0;
 
@@ -38,8 +35,6 @@ class ColorImageUtil {
 			x = 0;
 			y = y + img.getHeight();
 		}
-		
-		return page;
 	}
 
 	static ColorImage scale(ColorImage img, double factor) {
@@ -82,59 +77,68 @@ class ColorImageUtil {
 		 */
 
 		ColorImage imgNew = new ColorImage(img.getWidth(), img.getHeight());
-		
-		double centerX=img.getWidth()/2;
-		double centerY=img.getHeight()/2;
-		
+
+		double centerX = img.getWidth() / 2;
+		double centerY = img.getHeight() / 2;
+
 		for (int x = 0; x < imgNew.getWidth(); x++)
 			for (int y = 0; y < imgNew.getHeight(); y++) {
-				double dist=Math.sqrt((x-centerX)*(x-centerX)+(y-centerY)*(y-centerY));
-				if (dist<=r)
+				double dist = Math.sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
+				if (dist <= r)
 					imgNew.setColor(x, y, img.getColor(x, y));
-			    else{
-			    	Color vine = img.getColor(x, y).brighter(-(int)(dist-r));
+				else {
+					Color vine = img.getColor(x, y).brighter(-(int) (dist - r));
 					imgNew.setColor(x, y, vine);
 				}
-				
+
 			}
-		
+
 		return imgNew;
 	}
 
+	// Test functions
 	static void test_1_5() {
 		ColorImage img = new ColorImage("photo04_2.png");
-		double dist = 40;
-		ColorImage imgNew = vignette(img, dist);
+		ColorImage imgNew = vignette(img, 40);
+
+		return;
 	}
 
 	static void test_1_4() {
 		ColorImage img = new ColorImage("cat.jpeg");
 		ColorImage imgNew = grey(img);
+
+		return;
 	}
 
 	static void test_1_3() {
 		ColorImage img = new ColorImage("cat.jpeg");
-		// ColorImage imgNew = scale(img, 0.7);
 		ColorImage imgNew = scale(img, 1.25);
+		// ColorImage imgNew = scale(img, 0.7);
+
+		return;
 	}
 
 	static void test_1_2() {
-		ColorImage img = new ColorImage("cat.jpeg");
-		boolean isTransparent = false;
 		int width = 500, height = 1000;
-
-		ColorImage page = mozaico(img, width, height, isTransparent);
+		boolean isTransparent = false;
 		
+		ColorImage img = new ColorImage("cat.jpeg");
+		ColorImage page = new ColorImage(width, height);
+		
+		mozaico(page, img, isTransparent);
+
 		return;
 	}
 
 	static void test_1_1() {
 		ColorImage imgBig = new ColorImage("photo04.png");
 		ColorImage imgSmall = new ColorImage("photo04_2.png");
-		int x = 5, y = 20;
 
-		paste(imgBig, imgSmall, x, y, true);
+		paste(imgBig, imgSmall, 5, 20, true);
 		// paste(imgSmall, imgBig, x, y, true);
+		
+		return;
 	}
 
 }
