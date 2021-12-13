@@ -24,6 +24,10 @@ class Album {
 		return this.paginas.length;
 	}
 
+	void addPagina(Pagina page, int pos) {
+		this.paginas[pos] = page;
+	}
+
 	void next() {
 		if (currentPage == getNbPages() - 1)
 			throw new IllegalStateException("You were on the last page. There are no more pages.");
@@ -65,9 +69,21 @@ class Album {
 
 	static void test() {
 		Album alb = new Album(500, 1000, 5);
-		ColorImage currentPagePreview = alb.getCurrentPagina(true);
-		alb.switchPaginaPos(0,4);
-		ColorImage currentPagePreview2 = alb.getCurrentPagina(true);
+		ColorImage img = new ColorImage("cat.jpeg");
+		Foto foto = new Foto(img, "Gato com fundo castanho.", "09-12-2021");
+
+		Foto[] fotos = { foto, foto };
+		Pagina pag1 = new Pagina(foto, 500, 1000);
+		pag1.setMozaico(img, true);
+		alb.addPagina(pag1, 0);
+
+		//ColorImage currentPagePreview = alb.getCurrentPagina(true);
+		alb.switchPaginaPos(0, 1);
+		//ColorImage currentPagePreview2 = alb.getCurrentPagina(true);
+		alb.next();
+		alb.switchPaginaPos(0, 1);
+		alb.prev();
+		ColorImage currentPagePreview3 = alb.getCurrentPagina(true);
 		
 		return;
 	}
