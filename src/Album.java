@@ -6,7 +6,6 @@ class Album {
 	private Pagina[] paginas;
 	int currentPage;
 
-	// Constructors
 	Album(int width, int height, int nb) {
 		/*
 		 * Constructor builds the Album based on the dimensions and number of pages.
@@ -21,14 +20,26 @@ class Album {
 	}
 
 	int getNbPages() {
+		/*
+		 * Gets the number of pages.
+		 */
+
 		return this.paginas.length;
 	}
 
 	void addPagina(Pagina page, int pos) {
+		/*
+		 * Procedure that adds a page in a given position.
+		 */
+
 		this.paginas[pos] = page;
 	}
 
 	void next() {
+		/*
+		 * Procedure that moves the cursor 'currentPage' to the next page.
+		 */
+
 		if (currentPage == getNbPages() - 1)
 			throw new IllegalStateException("You were on the last page. There are no more pages.");
 		else
@@ -36,6 +47,10 @@ class Album {
 	}
 
 	void prev() {
+		/*
+		 * Procedure that moves the cursor 'currentPage' to the previous page.
+		 */
+
 		if (currentPage == 0)
 			throw new IllegalStateException("You were on the first page. There are no more pages.");
 		else
@@ -46,6 +61,7 @@ class Album {
 		/*
 		 * Function that obtains the visualization of a pagina of an ALbum
 		 */
+
 		return this.paginas[currentPage].getPagina(isTransparent);
 	}
 
@@ -67,6 +83,7 @@ class Album {
 		}
 	}
 
+	// Test functions
 	static void test() {
 		Album alb = new Album(500, 1000, 5);
 		ColorImage img = new ColorImage("cat.jpeg");
@@ -77,14 +94,14 @@ class Album {
 		pag1.setMozaico(img, true);
 		alb.addPagina(pag1, 0);
 
-		//ColorImage currentPagePreview = alb.getCurrentPagina(true);
+		// ColorImage currentPagePreview = alb.getCurrentPagina(true);
 		alb.switchPaginaPos(0, 1);
-		//ColorImage currentPagePreview2 = alb.getCurrentPagina(true);
+		// ColorImage currentPagePreview2 = alb.getCurrentPagina(true);
 		alb.next();
 		alb.switchPaginaPos(0, 1);
 		alb.prev();
 		ColorImage currentPagePreview3 = alb.getCurrentPagina(true);
-		
+
 		return;
 	}
 
