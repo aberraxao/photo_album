@@ -82,6 +82,8 @@ class Foto {
 
 		sub = "Gato cinza.";
 		fotoNew.setSubtitle(sub);
+		
+		return;
 	}
 
 	static void test_2_2() {
@@ -93,6 +95,8 @@ class Foto {
 
 		cd = "01-12-2021";
 		fotoNew.setCreationDate(cd);
+		
+		return;
 	}
 
 	static void test_2_3() {
@@ -110,6 +114,8 @@ class Foto {
 
 		y = 30;
 		fotoNew.setY(y);
+		
+		return;
 	}
 
 }
