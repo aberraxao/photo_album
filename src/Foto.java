@@ -5,6 +5,7 @@
  * - creation of type String
  * - x, y of type int to represent the positions in the Pagina
  */
+
 class Foto {
 	private ColorImage foto;
 	private String subtitle;

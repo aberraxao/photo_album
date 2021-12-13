@@ -41,6 +41,7 @@ class ColorImageUtil {
 		/**
 		 * Function that creates a copy of an image scaled by a factor.
 		 */
+		
 		int widthNew = (int) (factor * img.getWidth());
 		int heightNew = (int) (factor * img.getHeight());
 
