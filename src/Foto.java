@@ -67,44 +67,33 @@ class Foto {
 
 	static void test() {
 		ColorImage img = new ColorImage("photo04_2.png");
-		String sub = "Gato com fundo branco.";
-		String cd = "09-12-2021.";
-
-		Foto fotoNew = new Foto(img, sub, cd);
+		Foto fotoNew = new Foto(img, "Gato com fundo branco", "09-12-2021");
+		
+		return;
 	}
 
 	static void test_2_1() {
 		ColorImage img = new ColorImage("photo04_2.png");
-		String sub = "Gato com fundo branco.";
-		String cd = "09-12-2021";
+		Foto fotoNew = new Foto(img, "Gato com fundo branco", "09-12-2021");
 
-		Foto fotoNew = new Foto(img, sub, cd);
-
-		sub = "Gato cinza.";
-		fotoNew.setSubtitle(sub);
+		fotoNew.setSubtitle("Gato cinza");
 		
 		return;
 	}
 
 	static void test_2_2() {
 		ColorImage img = new ColorImage("photo04_2.png");
-		String sub = "Gato com fundo branco.";
-		String cd = "09-12-2021.";
+		Foto fotoNew = new Foto(img, "Gato com fundo branco", "09-12-2021");
 
-		Foto fotoNew = new Foto(img, sub, cd);
-
-		cd = "01-12-2021";
-		fotoNew.setCreationDate(cd);
+		fotoNew.setCreationDate("01-12-2021");
 		
 		return;
 	}
 
 	static void test_2_3() {
 		ColorImage img = new ColorImage("photo04_2.png");
-		String sub = "Gato com fundo branco.";
-		String cd = "09-12-2021.";
 
-		Foto fotoNew = new Foto(img, sub, cd);
+		Foto fotoNew = new Foto(img, "Gato com fundo branco", "09-12-2021");
 
 		int x = 10, y = 20;
 		fotoNew.setPositions(x, y);
@@ -117,5 +106,4 @@ class Foto {
 		
 		return;
 	}
-
 }
