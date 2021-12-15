@@ -137,7 +137,7 @@ class ColorImageUtil {
 		ColorImage imgSmall = new ColorImage("photo04_2.png");
 
 		paste(imgBig, imgSmall, 5, 20, true);
-		// paste(imgSmall, imgBig, x, y, true);
+		//paste(imgSmall, imgBig, 5, 20, true);
 		
 		return;
 	}

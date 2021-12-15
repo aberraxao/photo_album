@@ -57,12 +57,12 @@ class Album {
 			this.currentPage--;
 	}
 
-	ColorImage getCurrentPagina(boolean isTransparent) {
+	ColorImage getCurrentPagina(boolean isTransparent, boolean clearPagina) {
 		/*
 		 * Function that obtains the visualization of a pagina of an ALbum
 		 */
 
-		return this.paginas[currentPage].getPagina(isTransparent);
+		return this.paginas[currentPage].getPagina(isTransparent, clearPagina);
 	}
 
 	void switchPaginaPos(int pos1, int pos2) {
@@ -94,15 +94,15 @@ class Album {
 		pag.setMozaico(img, true);
 		alb.addPagina(pag, 0);
 
-		ColorImage currentPagePreview = alb.getCurrentPagina(true);
+		ColorImage currentPagePreview = alb.getCurrentPagina(true, false);
 		
 		alb.switchPaginaPos(0, 1);
-		currentPagePreview = alb.getCurrentPagina(true);
+		currentPagePreview = alb.getCurrentPagina(true, false);
 		
 		alb.next();
 		alb.switchPaginaPos(0, 1);
 		alb.prev();
-		currentPagePreview = alb.getCurrentPagina(true);
+		currentPagePreview = alb.getCurrentPagina(true, false);
 
 		return;
 	}

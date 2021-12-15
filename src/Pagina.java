@@ -59,15 +59,21 @@ class Pagina {
 		return this.pagina.getHeight();
 	}
 
-	ColorImage getPagina(boolean isTransparent) {
+	ColorImage getPagina(boolean isTransparent, boolean clearPagina) {
 		/*
 		 * Function that obtains the visualization of a pagina
 		 */
 
+		ColorImage finalPagina;
+
 		if (getNbFotos() > 0 && this.fotos[0] != null)
 			this.autoFotoPosition(isTransparent);
 
-		ColorImage finalPagina = this.pagina;
+		if (clearPagina == true)
+			finalPagina = new ColorImage(getWidth(), getHeight());
+		else
+			finalPagina = this.pagina;
+
 		int i = 0;
 		while (i < getNbFotos() && this.fotos[i] != null) {
 			ColorImageUtil.paste(finalPagina, this.fotos[i].getFoto(), this.fotos[i].getX(), this.fotos[i].getY(),
@@ -185,11 +191,11 @@ class Pagina {
 
 		Foto[] fotos1 = { foto1, foto2, foto3, foto4, foto5 };
 		Pagina pag1 = new Pagina(fotos1, 500, 1000);
-		ColorImage pagPreview = pag1.getPagina(true);
+		ColorImage pagPreview = pag1.getPagina(true, true);
 
 		Foto[] fotos2 = {};
 		Pagina pag2 = new Pagina(fotos2, 500, 1000);
-		ColorImage pagPreview2 = pag2.getPagina(true);
+		ColorImage pagPreview2 = pag2.getPagina(true, true);
 
 		return;
 	}
@@ -210,9 +216,9 @@ class Pagina {
 
 		Foto[] fotos2 = { foto1, foto2, foto3 };
 		Pagina pag2 = new Pagina(fotos2, 500, 1000);
-		ColorImage pagPreview2 = pag2.getPagina(true);
+		ColorImage pagPreview2 = pag2.getPagina(true, true);
 		pag2.switchFotoPos(0, 2);
-		pagPreview2 = pag2.getPagina(true);
+		pagPreview2 = pag2.getPagina(true, true);
 
 		return;
 	}
@@ -227,18 +233,20 @@ class Pagina {
 		Foto foto3 = new Foto(img3, "Gato preto anime.", "11-12-2021");
 
 		/*
-		 * Foto[] fotos1 = { foto1, foto2, foto3 }; Pagina pag1 = new Pagina(fotos1,
-		 * 500, 1000); pag1.removeFoto(-1);
+		 * Foto[] fotos1 = { foto1, foto2, foto3 }; 
+		 * Pagina pag1 = new Pagina(fotos1, 500, 1000); 
+		 * pag1.removeFoto(-1);
 		 */
 		/*
-		 * Foto[] fotos2 = { }; Pagina pag2 = new Pagina(fotos2, 500, 1000);
+		 * Foto[] fotos2 = { }; 
+		 * Pagina pag2 = new Pagina(fotos2, 500, 1000);
 		 * pag2.removeFoto(1);
 		 */
 
 		Foto[] fotos3 = { foto1, foto2, foto3 };
 		Pagina pag3 = new Pagina(fotos3, 500, 1000);
 		pag3.removeFoto(2);
-		ColorImage pagPreview = pag3.getPagina(true);
+		ColorImage pagPreview = pag3.getPagina(true, true);
 
 		return;
 	}
@@ -257,7 +265,7 @@ class Pagina {
 		Pagina pag = new Pagina(fotos, 500, 1000);
 		pag.addFoto(foto3);
 
-		ColorImage pagPreview = pag.getPagina(true);
+		ColorImage pagPreview = pag.getPagina(true, true);
 
 		return;
 	}
@@ -276,7 +284,7 @@ class Pagina {
 
 		pag1.setMozaico(img, true);
 
-		ColorImage pagPreview = pag1.getPagina(true);
+		ColorImage pagPreview = pag1.getPagina(true, true);
 
 		return;
 	}
