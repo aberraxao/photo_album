@@ -59,7 +59,7 @@ class Album {
 
 	ColorImage getCurrentPagina(boolean isTransparent, boolean clearPagina) {
 		/*
-		 * Function that obtains the visualization of a pagina of an ALbum
+		 * Function that obtains the visualization of a pagina of an Album
 		 */
 
 		return this.paginas[currentPage].getPagina(isTransparent, clearPagina);
@@ -94,17 +94,44 @@ class Album {
 		pag.setMozaico(img, true);
 		alb.addPagina(pag, 0);
 
-		ColorImage currentPagePreview = alb.getCurrentPagina(true, false);
+		//ColorImage currentPagePreview = alb.getCurrentPagina(true, false);
 		
 		alb.switchPaginaPos(0, 1);
-		currentPagePreview = alb.getCurrentPagina(true, false);
-		
 		alb.next();
+		ColorImage currentPagePreview = alb.getCurrentPagina(true, false);
+		
+		
 		alb.switchPaginaPos(0, 1);
 		alb.prev();
 		currentPagePreview = alb.getCurrentPagina(true, false);
 
 		return;
 	}
+	
+	static void testExceptionIllegalState(){
+		Album alb = new Album(500, 1000, 5);
+		ColorImage img = new ColorImage("cat.jpeg");
+		Foto foto = new Foto(img, "Gato com fundo castanho.", "09-12-2021");
 
+		Pagina pag = new Pagina(foto, 500, 1000);
+		
+		pag.setMozaico(img, true);
+		alb.addPagina(pag, 1);
+		
+		alb.prev();
+		
+		return;
+	}
+	
+	static void testExceptionIllegalArgument(){
+		Album alb = new Album(500, 1000, 5);
+		ColorImage img = new ColorImage("cat.jpeg");
+		Foto foto = new Foto(img, "Gato com fundo castanho.", "09-12-2021");
+
+		Pagina pag = new Pagina(foto, 500, 1000);
+		
+		alb.switchPaginaPos(0, 5);
+		
+		return;
+	}
 }

@@ -42,6 +42,8 @@ class Pagina {
 		/*
 		 * Function that returns the number of fotos
 		 */
+		if (this.fotos == null)
+			throw new NullPointerException("The photos are null.");
 		return this.fotos.length;
 	}
 
@@ -191,11 +193,11 @@ class Pagina {
 
 		Foto[] fotos1 = { foto1, foto2, foto3, foto4, foto5 };
 		Pagina pag1 = new Pagina(fotos1, 500, 1000);
-		ColorImage pagPreview = pag1.getPagina(true, true);
+		ColorImage pagPreview = pag1.getPagina(false, true);
 
 		Foto[] fotos2 = {};
 		Pagina pag2 = new Pagina(fotos2, 500, 1000);
-		ColorImage pagPreview2 = pag2.getPagina(true, true);
+		ColorImage pagPreview2 = pag2.getPagina(false, false);
 
 		return;
 	}
@@ -218,7 +220,7 @@ class Pagina {
 		Pagina pag2 = new Pagina(fotos2, 500, 1000);
 		ColorImage pagPreview2 = pag2.getPagina(true, true);
 		pag2.switchFotoPos(0, 2);
-		pagPreview2 = pag2.getPagina(true, true);
+		pagPreview2 = pag2.getPagina(true, false);
 
 		return;
 	}
@@ -245,8 +247,10 @@ class Pagina {
 
 		Foto[] fotos3 = { foto1, foto2, foto3 };
 		Pagina pag3 = new Pagina(fotos3, 500, 1000);
-		pag3.removeFoto(2);
-		ColorImage pagPreview = pag3.getPagina(true, true);
+		//ColorImage pagPreview = pag3.getPagina(true, true);
+
+		pag3.removeFoto(1);
+		ColorImage pagPreview2 = pag3.getPagina(true, true);
 
 		return;
 	}
@@ -265,7 +269,7 @@ class Pagina {
 		Pagina pag = new Pagina(fotos, 500, 1000);
 		pag.addFoto(foto3);
 
-		ColorImage pagPreview = pag.getPagina(true, true);
+		ColorImage pagPreview = pag.getPagina(true, false);
 
 		return;
 	}
@@ -284,9 +288,14 @@ class Pagina {
 
 		pag1.setMozaico(img, true);
 
-		ColorImage pagPreview = pag1.getPagina(true, true);
+		ColorImage pagPreview = pag1.getPagina(true, false);
 
 		return;
 	}
-
+	
+	static void testNullException() {
+		Foto[] fotos2 = {};
+		Pagina pag2 = new Pagina(fotos2, 500, 1000);
+		ColorImage pagPreview2 = pag2.getPagina(false, false);
+	}
 }
